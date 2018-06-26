@@ -3,12 +3,24 @@ html {
   font-family: 'Montserrat', sans-serif; }
 
 body {
-  background: #382a41;
-  background: -moz-linear-gradient(left, #382a41 0%, #1b1a3a 100%);
-  background: -webkit-linear-gradient(left, #382a41 0%, #1b1a3a 100%);
-  background: linear-gradient(to right, #382a41 0%, #1b1a3a 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#382a41', endColorstr='#1b1a3a',GradientType=0 ); }
-
+  background: linear-gradient(145deg, #874242, #632f2f, #2f2e61, #24234b, #234b26, #397b3e);
+  background-size: 1200% 1200%;
+  -webkit-animation: AnimationName 53s ease infinite;
+  animation: AnimationName 53s ease infinite; }
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 0% 43%; }
+  50% {
+    background-position: 100% 58%; }
+  100% {
+    background-position: 0% 43%; } }
+@keyframes AnimationName {
+  0% {
+    background-position: 0% 43%; }
+  50% {
+    background-position: 100% 58%; }
+  100% {
+    background-position: 0% 43%; } }
 header {
   background-color: #fff;
   height: 5vh;
@@ -102,8 +114,13 @@ main {
   margin: 5rem 2rem; }
   .section__div-colors p {
     font-size: 3rem;
-    color: white;
-    margin: 6.5rem 3rem; }
+    margin: 6.5rem 3rem 2rem;
+    filter: invert(100%); }
+  .section__div-colors img {
+    width: 4rem;
+    margin: 0 auto;
+    display: block;
+    filter: invert(100%); }
 
 .main__div-divider {
   margin-bottom: 3rem; }
