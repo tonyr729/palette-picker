@@ -77,6 +77,10 @@ main {
   height: 20rem;
   border-radius: 37rem;
   margin: 5rem 2rem; }
+  .section__div-colors p {
+    font-size: 3rem;
+    color: #a9a9a9;
+    margin: 6.5rem 3rem; }
 
 .main__div-divider {
   margin-bottom: 3rem; }
