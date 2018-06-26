@@ -1,3 +1,7 @@
+html {
+  font-size: 10px;
+  font-family: 'Montserrat', sans-serif; }
+
 body {
   background: #382a41;
   background: -moz-linear-gradient(left, #382a41 0%, #1b1a3a 100%);
@@ -6,7 +10,14 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#382a41', endColorstr='#1b1a3a',GradientType=0 ); }
 
 header {
-  background-color: #90ee90; }
+  background-color: #90ee90;
+  height: 4rem;
+  text-align: center; }
+  header h1 {
+    margin: 0;
+    font-family: 'Galada', cursive;
+    font-size: 3rem;
+    padding-top: .5rem; }
 
 main {
   background-color: #d3d3d3; }
