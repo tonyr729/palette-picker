@@ -7,11 +7,12 @@ const getRandomColor = () => {
   return color;
 }
 
-const generateColors = () => {
+const generateColors = (event) => {
   for (let index = 0; index < 5; index++) {
     let element = ".color" + (index + 1)
     let randomColor = getRandomColor();
     $(element).css("background-color", randomColor);
+    $(element + " p").css("color", randomColor);
     let value = $(element + " p").text(randomColor);
   }
 }
@@ -19,3 +20,15 @@ const generateColors = () => {
 generateColors();
 
 $(".div__button--generate").on('click', generateColors)
+
+
+
+$(".div__img-lockicon").on('click', changeLockedIcon)
+
+function changeLockedIcon() {
+  if ($(this).attr('src').includes("unlocked")) {
+    $(this).attr("src","../images/locked.svg");
+  } else {
+    $(this).attr("src","../images/unlocked.svg");
+  }
+}
