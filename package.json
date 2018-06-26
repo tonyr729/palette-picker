@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -12,5 +13,14 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tonyr729/palette-picker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tonyr729/palette-picker/issues"
+  },
+  "homepage": "https://github.com/tonyr729/palette-picker#readme"
 }
