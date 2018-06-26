@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" type="text/css" href="./css/styles.css">
-  <link rel="stylesheet" type="text/css" href="css/normalize.css">
-  <link href="https://fonts.googleapis.com/css?family=Galada|Montserrat:300,400,700" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link href="https://fonts.googleapis.com/css?family=Galada|Montserrat:300,400,700" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <title>Palette Picker</title>
 </head>
 <body>
@@ -16,40 +17,43 @@
   <main>
     <section class="main__section-top">
       <div class="section__div color-container">
-        <div class="section__div-colors color-one">
+        <div class="section__div-colors color1">
           <img src="" alt="" class="div__img-lockicon">
           <p class="div__p-colorhex"></p>
         </div>
-        <div class="section__div-colors color-two">
+        <div class="section__div-colors color2">
           <img src="" alt="" class="div__img-lockicon">
           <p class="div__p-colorhex"></p>
         </div>
-        <div class="section__div-colors color-three">
+        <div class="section__div-colors color3">
           <img src="" alt="" class="div__img-lockicon">
           <p class="div__p-colorhex"></p>
         </div>
-        <div class="section__div-colors color-four">
+        <div class="section__div-colors color4">
           <img src="" alt="" class="div__img-lockicon">
           <p class="div__p-colorhex"></p>
         </div>
-        <div class="section__div-colors color-five">
+        <div class="section__div-colors color5">
           <img src="" alt="" class="div__img-lockicon">
           <p class="div__p-colorhex"></p>
         </div>
       </div>
-      <div class="section__div picker-container">
+      <div class="section__div input-container">
         <button class="div__button--generate">Generate New Palette!</button>
-        <form action="" class="section__form-save-palette">
-          <select name="" id="" class="form__select-project">
+        <form>
+          <select>
             <option value="project 1">Project 1</option>
           </select>
-          <input type="text" class="form__input-project">
-          <button class="form__button-save"></button>
+          <input type="text">
+          <button>Save Palette</button>
         </form>
       </div>
     </section>
+    <div class="main__div-divider">
+      <span></span>
+    </div>
     <section class="main__section-bottom">
-      <form action="" class="section__form-projects">
+      <form class="section__form-projects">
         <p class="form__p-instruction">Create a new Project:</p>
         <input type="text">
         <button>Save Project</button>

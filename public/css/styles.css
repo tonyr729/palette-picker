@@ -10,30 +10,103 @@ body {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#382a41', endColorstr='#1b1a3a',GradientType=0 ); }
 
 header {
-  background-color: #90ee90;
-  height: 4rem;
+  background-color: #fff;
+  height: 5vh;
   text-align: center; }
   header h1 {
     margin: 0;
     font-family: 'Galada', cursive;
     font-size: 3rem;
-    padding-top: .5rem; }
+    padding-top: 1rem; }
 
 main {
-  background-color: #d3d3d3; }
+  /* background-color: #d3d3d3; */
+  height: 90vh;
+  width: 97%;
+  margin: 2rem auto; }
 
 .main__section-top {
-  background-color: #ffc0cb; }
+  height: 58%; }
 
-.section__div-container {
-  background-color: #474747; }
+.color-container {
+  display: flex;
+  height: 70%;
+  justify-content: space-between;
+  border-radius: .6rem; }
+
+.input-container {
+  margin: 2rem auto;
+  display: block;
+  width: 55rem;
+  height: 11rem; }
+  .input-container form {
+    margin: 1rem auto;
+    display: block;
+    width: 52rem;
+    height: 3rem; }
+    .input-container form input {
+      width: 30rem;
+      height: 3rem;
+      margin: 1rem; }
+    .input-container form select {
+      border: none;
+      height: 3.4rem;
+      width: 8rem;
+      font-size: 1.2rem; }
+    .input-container form button {
+      font-size: 1.3rem;
+      border: none;
+      height: 3.4rem;
+      vertical-align: middle;
+      padding: 0 1rem;
+      border-radius: .5rem; }
+
+.div__button--generate {
+  height: 4rem;
+  width: 20rem;
+  border: none;
+  font-size: 1.4rem;
+  border-radius: 2rem;
+  box-shadow: 1px 1px 4px 0px;
+  margin: 0 auto;
+  display: block; }
 
 .section__div-colors {
-  background-color: #add8e6; }
+  width: 20rem;
+  box-shadow: 4px 3px 10px;
+  height: 20rem;
+  border-radius: 37rem;
+  margin: 5rem 2rem; }
+
+.main__div-divider {
+  margin-bottom: 3rem; }
+  .main__div-divider span {
+    display: block;
+    border: none;
+    color: white;
+    height: 1px;
+    background: black;
+    background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 600, from(white), to(rgba(255, 255, 255, 0))); }
 
 .main__section-bottom {
-  background-color: #ff8ea1; }
+  height: 38%; }
   .main__section-bottom form {
-    background-color: #fff; }
+    width: 43rem;
+    margin: 0 auto; }
+    .main__section-bottom form p {
+      margin: 0 0 0 1rem;
+      color: #f8f8ff;
+      font-size: 1.2rem; }
+    .main__section-bottom form input {
+      width: 30rem;
+      height: 3rem;
+      margin: 1rem; }
+    .main__section-bottom form button {
+      font-size: 1.3rem;
+      border: none;
+      height: 3.4rem;
+      vertical-align: middle;
+      padding: 0 1rem;
+      border-radius: .5rem; }
 
 /*# sourceMappingURL=styles.css.map */
