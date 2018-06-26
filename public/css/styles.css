@@ -69,7 +69,30 @@ main {
   border-radius: 2rem;
   box-shadow: 1px 1px 4px 0px;
   margin: 0 auto;
-  display: block; }
+  display: block;
+  outline: none; }
+  .div__button--generate:hover {
+    color: #fff;
+    background: linear-gradient(270deg, #ff5e5e, #608dff, #03d0ad);
+    background-size: 600% 600%;
+    -webkit-animation: ButtonHover 3s ease infinite;
+    animation: ButtonHover 3s ease infinite; }
+@-webkit-keyframes ButtonHover {
+  0% {
+    background-position: 0% 34%; }
+  50% {
+    background-position: 100% 67%; }
+  100% {
+    background-position: 0% 34%; } }
+@keyframes ButtonHover {
+  0% {
+    background-position: 0% 34%; }
+  50% {
+    background-position: 100% 67%; }
+  100% {
+    background-position: 0% 34%; } }
+  .div__button--generate:active {
+    filter: invert(100%); }
 
 .section__div-colors {
   width: 20rem;
@@ -79,7 +102,7 @@ main {
   margin: 5rem 2rem; }
   .section__div-colors p {
     font-size: 3rem;
-    color: #a9a9a9;
+    color: white;
     margin: 6.5rem 3rem; }
 
 .main__div-divider {
