@@ -13,8 +13,9 @@ const generateColors = () => {
     let randomColor = getRandomColor();
     $(element).css("background-color", randomColor);
     let value = $(element + " p").text(randomColor);
-    console.log(value)
   }
 }
 
 generateColors();
+
+$(".div__button--generate").on('click', generateColors)
