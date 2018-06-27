@@ -39,7 +39,7 @@ const fetchProjects = async () => {
 const fetchPalettes = async (project) => {
   const response = await fetch('http://localhost:3000/api/v1/palettes')
   const palettes = await response.json();
-  const matchingPalettes = palettes.filter(palette => palette.project === project)
+  const matchingPalettes = palettes.filter(palette => palette.project_id === project)
   return matchingPalettes;
 }
 
