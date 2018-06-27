@@ -59,14 +59,14 @@ const prependProjects = (projects) => {
   projects.forEach(project => {
     const paletteInfo = project.palettes.map(palette => {
       return (
-        `<p class="palette__name">${palette.name}</p>
-        <div class="palette-container">
+        `<div class="palette-container">
+          <p class="palette__name">${palette.name}</p>
           <div class="div__color" style="background-color: ${palette.color1};"></div>
           <div class="div__color" style="background-color: ${palette.color2};"></div>
           <div class="div__color" style="background-color: ${palette.color3};"></div>
           <div class="div__color" style="background-color: ${palette.color4};"></div>
           <div class="div__color" style="background-color: ${palette.color5};"></div>
-          <img src="#" alt="delete icon" />
+          <img src="${'../images/white_x.svg'}" alt="delete icon" />
         </div>`
       )
     });
