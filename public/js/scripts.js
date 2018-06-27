@@ -20,9 +20,6 @@ const generateColors = (event) => {
 generateColors();
 
 $(".div__button--generate").on('click', generateColors)
-
-
-
 $(".div__img-lockicon").on('click', changeLockedIcon)
 
 function changeLockedIcon() {
@@ -32,3 +29,55 @@ function changeLockedIcon() {
     $(this).attr("src","../images/unlocked.svg");
   }
 }
+
+const fetchProjects = async () => {
+  const response = await fetch('http://localhost:3000/api/v1/projects')
+  const projects = await response.json();
+  return projects
+}
+
+const fetchPalettes = async (project) => {
+  const response = await fetch('http://localhost:3000/api/v1/palettes')
+  const palettes = await response.json();
+  const matchingPalettes = palettes.filter(palette => palette.project === project)
+  return matchingPalettes;
+}
+
+const loadProjects = async () => {
+  const projects= await fetchProjects();
+  const projectsWithPalettes= projects.map(async project => {
+    const projectPalettes = await fetchPalettes(project.id)
+    const newProject = {...project, palettes: projectPalettes}
+    return newProject;
+  });
+  prependProjects(await Promise.all(projectsWithPalettes))
+}
+
+const prependProjects = (projects) => {
+  console.log(projects)
+  const $cardArea = $(".section__div-projects")
+  projects.forEach(project => {
+    const paletteInfo = project.palettes.map(palette => {
+      return (
+        `<p class="palette__name">${palette.name}</p>
+        <div class="palette-container">
+          <div class="div__color" style="background-color: ${palette.color1};"></div>
+          <div class="div__color" style="background-color: ${palette.color2};"></div>
+          <div class="div__color" style="background-color: ${palette.color3};"></div>
+          <div class="div__color" style="background-color: ${palette.color4};"></div>
+          <div class="div__color" style="background-color: ${palette.color5};"></div>
+          <img src="#" alt="delete icon" />
+        </div>`
+      )
+    });
+
+    $cardArea.append(
+      `<div class="project__card">
+        <button class="project__button">${project.name}</button>
+        ${paletteInfo}
+      </div>`
+    )
+  })
+}
+
+loadProjects();
