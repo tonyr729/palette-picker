@@ -36,11 +36,10 @@ const fetchProjects = async () => {
   return projects
 }
 
-const fetchPalettes = async (project) => {
-  const response = await fetch('http://localhost:3000/api/v1/palettes')
+const fetchPalettes = async (projectID) => {
+  const response = await fetch(`http://localhost:3000/api/v1/projects/${projectID}/palettes`)
   const palettes = await response.json();
-  const matchingPalettes = palettes.filter(palette => palette.project_id === project)
-  return matchingPalettes;
+  return palettes;
 }
 
 const loadProjects = async () => {
