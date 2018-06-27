@@ -3,18 +3,18 @@ html {
   font-family: 'Montserrat', sans-serif; }
 
 body {
-  background: linear-gradient(145deg, #874242, #632f2f, #2f2e61, #24234b, #234b26, #397b3e);
+  background: linear-gradient(145deg, #e2788f, #612e39, #2f2e61, #24234b, #23484b, #396e7b);
   background-size: 1200% 1200%;
-  -webkit-animation: AnimationName 53s ease infinite;
-  animation: AnimationName 53s ease infinite; }
-@-webkit-keyframes AnimationName {
+  -webkit-animation: backgroundFade 53s ease infinite;
+  animation: backgroundFade 53s ease infinite; }
+@-webkit-keyframes backgroundFade {
   0% {
     background-position: 0% 43%; }
   50% {
     background-position: 100% 58%; }
   100% {
     background-position: 0% 43%; } }
-@keyframes AnimationName {
+@keyframes backgroundFade {
   0% {
     background-position: 0% 43%; }
   50% {
@@ -152,5 +152,35 @@ main {
       vertical-align: middle;
       padding: 0 1rem;
       border-radius: .5rem; }
+
+.section__div-projects {
+  display: flex; }
+
+.project__card {
+  width: 35rem;
+  height: 25rem; }
+  .project__card p {
+    margin: .6rem 1rem 0 2rem;
+    font-size: 1.2rem;
+    color: #fff; }
+
+.project__button {
+  font-size: 2rem;
+  padding: .5rem 1rem;
+  border: none;
+  box-shadow: 2px 2px 3px; }
+
+.palette-container {
+  display: flex;
+  width: 30rem;
+  margin: 2rem 0; }
+  .palette-container div {
+    height: 2rem;
+    width: 2rem;
+    margin: 0.2rem; }
+  .palette-container img {
+    width: 2rem;
+    height: 2rem;
+    padding: 0.2rem; }
 
 /*# sourceMappingURL=styles.css.map */
