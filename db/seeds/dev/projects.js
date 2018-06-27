@@ -11,20 +11,20 @@ exports.seed = function(knex, Promise) {
           return knex('palettes').insert([
             { 
               name: 'Palette 1', 
-              color1: '#75000', 
-              color2: '#ffa00', 
-              color3: '#fba01', 
-              color4: '#fb0a1', 
-              color5: '#ba041',
+              color1: '#750000', 
+              color2: '#ffa000', 
+              color3: '#fba010', 
+              color4: '#fb0a10', 
+              color5: '#ba0410',
               project_id: project[0]
             },
             { 
               name: 'Palette 2', 
-              color1: '#755aa', 
-              color2: '#fbaa0', 
-              color3: '#fd011', 
-              color4: '#ffba1', 
-              color5: '#bf441',
+              color1: '#755aa0', 
+              color2: '#fbaa00', 
+              color3: '#fd0110', 
+              color4: '#ffba10', 
+              color5: '#bf4410',
               project_id: project[0]
             }
           ])
