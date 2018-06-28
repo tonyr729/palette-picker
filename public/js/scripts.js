@@ -54,7 +54,8 @@ const loadProjects = async () => {
 
 const prependProjects = (projects) => {
   console.log(projects)
-  const $cardArea = $(".section__div-projects")
+  const $cardArea = $(".section__div-projects");
+  const $selectDropdown = $(".form__select-projects")
   projects.forEach(project => {
     const paletteInfo = project.palettes.map(palette => {
       return (
@@ -69,6 +70,10 @@ const prependProjects = (projects) => {
         </div>`
       )
     });
+
+    $selectDropdown.append(
+      `<option value=${project.id}>${project.name}</option>`
+    )
 
     $cardArea.append(
       `<div class="project__card">
