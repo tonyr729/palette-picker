@@ -43,33 +43,70 @@ const fetchPalettes = async (projectID) => {
 }
 
 const loadProjects = async () => {
-  const projects= await fetchProjects();
+  const projects = await fetchProjects();
   const projectsWithPalettes= projects.map(async project => {
     const projectPalettes = await fetchPalettes(project.id)
     const newProject = {...project, palettes: projectPalettes}
     return newProject;
   });
-  prependProjects(await Promise.all(projectsWithPalettes))
+
+  appendProjects(await Promise.all(projectsWithPalettes))
 }
 
-const prependProjects = (projects) => {
-  console.log(projects)
+
+
+const postData = async (url, data) => {
+  const response = await fetch(url, {
+    body: JSON.stringify(data),
+    headers: {
+      'content-type': 'application/json'
+    },
+    method: 'POST'
+  });
+  const result = await response.json()
+  return result;
+}
+
+
+const saveProject = (event) => {
+  event.preventDefault()
+  const $projectName = $('.form__input-project').val()
+  // console.log($projectName)
+  postData('http://localhost:3000/api/v1/projects', {name: $projectName})
+  .then(result=> console.log(result))
+  .catch(error => console.error(error))
+}
+
+$('.save-projects').on('click', saveProject);
+
+
+const appendProjects = (projects) => {
   const $cardArea = $(".section__div-projects");
   const $selectDropdown = $(".form__select-projects")
   projects.forEach(project => {
-    const paletteInfo = project.palettes.map(palette => {
-      return (
+    console.log(project)
+    let paletteInfo;
+    if (!project.palettes.error) {
+      paletteInfo = project.palettes.map(palette => {
+        return (
+          `<div class="palette-container">
+            <p class="palette__name">${palette.name}</p>
+            <div class="div__color" style="background-color: ${palette.color1};"></div>
+            <div class="div__color" style="background-color: ${palette.color2};"></div>
+            <div class="div__color" style="background-color: ${palette.color3};"></div>
+            <div class="div__color" style="background-color: ${palette.color4};"></div>
+            <div class="div__color" style="background-color: ${palette.color5};"></div>
+            <img src="${'../images/white_x.svg'}" alt="delete icon" />
+          </div>`
+        )
+      });
+    } else {
+      paletteInfo = [(
         `<div class="palette-container">
-          <p class="palette__name">${palette.name}</p>
-          <div class="div__color" style="background-color: ${palette.color1};"></div>
-          <div class="div__color" style="background-color: ${palette.color2};"></div>
-          <div class="div__color" style="background-color: ${palette.color3};"></div>
-          <div class="div__color" style="background-color: ${palette.color4};"></div>
-          <div class="div__color" style="background-color: ${palette.color5};"></div>
-          <img src="${'../images/white_x.svg'}" alt="delete icon" />
+          <p class="palette__name">No Palettes saved.</p>
         </div>`
-      )
-    });
+      )]
+    }
 
     $selectDropdown.append(
       `<option value=${project.id}>${project.name}</option>`
