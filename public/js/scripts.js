@@ -68,10 +68,8 @@ const postData = async (url, data) => {
 }
 
 
-const saveProject = (event) => {
-  event.preventDefault()
+const saveProject = () => {
   const $projectName = $('.form__input-project').val()
-  // console.log($projectName)
   postData('http://localhost:3000/api/v1/projects', {name: $projectName})
   .then(result=> console.log(result))
   .catch(error => console.error(error))
@@ -79,12 +77,44 @@ const saveProject = (event) => {
 
 $('.save-projects').on('click', saveProject);
 
+const savePalette = () => {
+  const $paletteName = $('.form__input-palette').val();
+  const colors = captureColors();
+  const $currProject = $('.form__select-projects').val()
+  const finalPalette = generatePalette($paletteName, colors, $currProject);
+  const url = `http://localhost:3000/api/v1/projects/${$currProject}/palettes`;
+
+  postData(url, finalPalette)
+    .then(result=> console.log(result))
+    .catch(error => console.error(error))
+}
+
+$('.save-palette').on('click', savePalette)
+
+const captureColors = () => {
+  const colorElements = $('.div__p-colorhex')
+  const colors = Object.values(colorElements).map(colorElement => colorElement.innerHTML).slice(0, 5)
+  return colors;
+}
+
+const generatePalette = (name, colors, pID) => {
+  const palette = {
+    name,
+    color1: colors[0],
+    color2: colors[1],
+    color3: colors[2],
+    color4: colors[3],
+    color5: colors[4],
+    project_id: pID,
+  }
+  return palette;
+}
+
 
 const appendProjects = (projects) => {
   const $cardArea = $(".section__div-projects");
   const $selectDropdown = $(".form__select-projects")
   projects.forEach(project => {
-    console.log(project)
     let paletteInfo;
     if (!project.palettes.error) {
       paletteInfo = project.palettes.map(palette => {
