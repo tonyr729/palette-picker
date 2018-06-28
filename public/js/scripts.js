@@ -36,11 +36,10 @@ const fetchProjects = async () => {
   return projects
 }
 
-const fetchPalettes = async (project) => {
-  const response = await fetch('http://localhost:3000/api/v1/palettes')
+const fetchPalettes = async (projectID) => {
+  const response = await fetch(`http://localhost:3000/api/v1/projects/${projectID}/palettes`)
   const palettes = await response.json();
-  const matchingPalettes = palettes.filter(palette => palette.project_id === project)
-  return matchingPalettes;
+  return palettes;
 }
 
 const loadProjects = async () => {
@@ -55,7 +54,8 @@ const loadProjects = async () => {
 
 const prependProjects = (projects) => {
   console.log(projects)
-  const $cardArea = $(".section__div-projects")
+  const $cardArea = $(".section__div-projects");
+  const $selectDropdown = $(".form__select-projects")
   projects.forEach(project => {
     const paletteInfo = project.palettes.map(palette => {
       return (
@@ -70,6 +70,10 @@ const prependProjects = (projects) => {
         </div>`
       )
     });
+
+    $selectDropdown.append(
+      `<option value=${project.id}>${project.name}</option>`
+    )
 
     $cardArea.append(
       `<div class="project__card">
