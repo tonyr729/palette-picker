@@ -51,7 +51,7 @@ const validateFields = () => {
   const paletteInput = $('.form__input-palette')
   const projectButton = $('.save-project')
   const paletteButton = $('.save-palette')
-  
+  console.log(projectInput.val())  
 
   projectInput.val() === '' ? 
     projectButton.prop('disabled', true) : 
@@ -233,5 +233,5 @@ $('.form__input-palette').on('keyup', validateFields)
 $(".div__button--generate").on('click', generateColors)
 $(".div__img-lockicon").on('click', changeLockedIcon)
 $('.save-palette').on('click', savePalette)
-$('.save-projects').on('click', saveProject);
+$('.save-project').on('click', saveProject);
 $(".main__section-bottom").on('click', deletePalette)
