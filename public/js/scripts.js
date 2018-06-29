@@ -34,13 +34,13 @@ const loadProjects = async () => {
 }
 
 const fetchProjects = async () => {
-  const response = await fetch('http://localhost:3000/api/v1/projects')
+  const response = await fetch('/api/v1/projects')
   const projects = await response.json();
   return projects
 }
 
 const fetchPalettes = async (projectID) => {
-  const response = await fetch(`http://localhost:3000/api/v1/projects/${projectID}/palettes`)
+  const response = await fetch(`/api/v1/projects/${projectID}/palettes`)
   const palettes = await response.json();
   return palettes;
 }
@@ -71,7 +71,7 @@ const saveProject = () => {
   const $projectName = $('.form__input-project').val();
   const $selectDropdown = $(".form__select-projects");
 
-  postData('http://localhost:3000/api/v1/projects', {name: $projectName})
+  postData('/api/v1/projects', {name: $projectName})
     .then(result=> {
       $selectDropdown.append(
         `<option value=${result.id}>${$projectName}</option>`
@@ -96,7 +96,7 @@ const savePalette = (event) => {
   const $currProject = $('.form__select-projects').val()
   const $projectCard = $(`.id__${$currProject}`)
   const finalPalette = generatePalette($paletteName, colors, $currProject);
-  const url = `http://localhost:3000/api/v1/projects/${$currProject}/palettes`;
+  const url = `/api/v1/projects/${$currProject}/palettes`;
   
   postData(url, finalPalette)
     .then(result=> {
@@ -142,7 +142,7 @@ const generatePalette = (name, colors, pID) => {
 }
 
 const deleteData = async (projectID, paletteID) => {
-  fetch(`http://localhost:3000/api/v1/projects/${projectID}/palettes/${paletteID}`, {
+  fetch(`/api/v1/projects/${projectID}/palettes/${paletteID}`, {
     method: 'DELETE'
   });
 }
