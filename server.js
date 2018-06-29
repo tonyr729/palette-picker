@@ -1,5 +1,7 @@
 const express = require('express');
+// Import express
 const app = express();
+// Instantiate express as app
 const bodyParser = require('body-parser');
 
 app.set('port', process.env.PORT || 3000);
