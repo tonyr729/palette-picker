@@ -51,7 +51,6 @@ const validateFields = () => {
   const paletteInput = $('.form__input-palette')
   const projectButton = $('.save-project')
   const paletteButton = $('.save-palette')
-  console.log(projectInput.val())  
 
   projectInput.val() === '' ? 
     projectButton.prop('disabled', true) : 
@@ -111,7 +110,7 @@ const saveProject = () => {
         )
       })
       .catch(error => console.log(error))
-      $('.form__input-project').val('');
+    $('.form__input-project').val('');
   } else {
     $('#project__warning').text('Please use a Project Name that doesn\'t already exist.')
   }
@@ -147,6 +146,7 @@ const savePalette = (event) => {
       )
     })
     .catch(error => console.error(error))
+  $('.form__input-palette').val('');
 }
 
 
