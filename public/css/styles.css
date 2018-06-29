@@ -180,7 +180,8 @@ main {
   .project__card p {
     margin: .6rem 1rem 0 2rem;
     font-size: 1.2rem;
-    color: #fff; }
+    color: #fff;
+    width: 11rem; }
 
 .project__title {
   font-size: 3rem;
@@ -191,7 +192,7 @@ main {
 .palette-container {
   display: flex;
   width: 30rem;
-  margin: 2rem 0; }
+  margin: .5rem 0; }
   .palette-container div {
     height: 2rem;
     width: 2rem;
