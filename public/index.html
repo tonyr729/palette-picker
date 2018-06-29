@@ -44,7 +44,7 @@
           <select class="form__select-projects">
           </select>
           <input type="text" class="form__input-palette">
-          <button class="form__button save-palette">Save Palette</button>
+          <button class="form__button save-palette" disabled>Save Palette</button>
         </form>
       </div>
     </section>
@@ -55,7 +55,8 @@
       <form class="section__form-projects">
         <p class="form__p-instruction">Create a new Project:</p>
         <input type="text" class="form__input-project">
-        <button class="form__button save-projects">Save Project</button>
+        <button class="form__button save-project" disabled>Save Project</button>
+        <p id="project__warning"></p>
       </form>
       <div class="section__div-projects">
         <!-- prepend cards here -->

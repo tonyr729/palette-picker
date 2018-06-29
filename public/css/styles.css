@@ -72,6 +72,12 @@ main {
       vertical-align: middle;
       padding: 0 1rem;
       border-radius: .5rem; }
+      .input-container form button:hover {
+        background-color: #0080b3; }
+      .input-container form button:active {
+        background-color: #6cd5ff; }
+      .input-container form button:disabled {
+        background-color: #242424; }
 
 .div__button--generate {
   height: 4rem;
@@ -152,6 +158,17 @@ main {
       vertical-align: middle;
       padding: 0 1rem;
       border-radius: .5rem; }
+      .main__section-bottom form button:hover {
+        background-color: #0080b3; }
+      .main__section-bottom form button:active {
+        background-color: #6cd5ff; }
+      .main__section-bottom form button:disabled {
+        background-color: #242424; }
+
+#project__warning {
+  color: #ff723e;
+  font-size: 1.1rem;
+  height: 1rem; }
 
 .section__div-projects {
   display: flex;
@@ -163,7 +180,8 @@ main {
   .project__card p {
     margin: .6rem 1rem 0 2rem;
     font-size: 1.2rem;
-    color: #fff; }
+    color: #fff;
+    width: 11rem; }
 
 .project__title {
   font-size: 3rem;
@@ -174,7 +192,7 @@ main {
 .palette-container {
   display: flex;
   width: 30rem;
-  margin: 2rem 0; }
+  margin: .5rem 0; }
   .palette-container div {
     height: 2rem;
     width: 2rem;

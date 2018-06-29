@@ -89,9 +89,19 @@ main {
       vertical-align: middle;
       padding: 0 1rem;
       border-radius: .5rem;
+      &:hover {
+        background-color: #0080b3;
+      }
+      &:active {
+        background-color: #6cd5ff;
+      }
+      &:disabled {
+        background-color: #242424;
+      }
     }
   }
 }
+
 
 .div__button--generate {
   height: 4rem;
@@ -107,19 +117,19 @@ main {
     color: #fff;
     background: linear-gradient(270deg, #ff5e5e, #608dff, #03d0ad);
     background-size: 600% 600%;
-
+    
     -webkit-animation: ButtonHover 3s ease infinite;
     animation: ButtonHover 3s ease infinite;
-
+    
     @-webkit-keyframes ButtonHover {
-        0%{background-position:0% 34%}
-        50%{background-position:100% 67%}
-        100%{background-position:0% 34%}
+      0%{background-position:0% 34%}
+      50%{background-position:100% 67%}
+      100%{background-position:0% 34%}
     }
     @keyframes ButtonHover { 
-        0%{background-position:0% 34%}
-        50%{background-position:100% 67%}
-        100%{background-position:0% 34%}
+      0%{background-position:0% 34%}
+      50%{background-position:100% 67%}
+      100%{background-position:0% 34%}
     }
   }
   &:active {
@@ -181,8 +191,23 @@ main {
       vertical-align: middle;
       padding: 0 1rem;
       border-radius: .5rem;
+      &:hover {
+        background-color: #0080b3;
+      }
+      &:active {
+        background-color: #6cd5ff;
+      }
+      &:disabled {
+        background-color: #242424;
+      }
     }
   }
+}
+
+#project__warning {
+  color: #ff723e;
+  font-size: 1.1rem;
+  height: 1rem;
 }
 
 .section__div-projects {
@@ -197,6 +222,7 @@ main {
     margin: .6rem 1rem 0 2rem;
     font-size: 1.2rem;
     color: #fff;
+    width: 11rem;
   }
 }
 
@@ -210,7 +236,7 @@ main {
 .palette-container {
   display: flex;
   width: 30rem;
-  margin: 2rem 0;
+  margin: .5rem 0;
   div {
     height: 2rem;
     width: 2rem;

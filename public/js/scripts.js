@@ -7,9 +7,12 @@ const generateColors = (event) => {
   for (let index = 0; index < 5; index++) {
     let element = ".color" + (index + 1)
     let randomColor = getRandomColor();
-    $(element).css("background-color", randomColor);
-    $(element + " p").css("color", randomColor);
-    let value = $(element + " p").text(randomColor);
+
+    if ($(element).children('img')[0].classList.length === 1) {
+      $(element).css("background-color", randomColor);
+      $(element + " p").css("color", randomColor);
+      let value = $(element + " p").text(randomColor);
+    }
   }
 }
 
@@ -29,8 +32,33 @@ const loadProjects = async () => {
     const newProject = {...project, palettes: projectPalettes}
     return newProject;
   });
-
+  
   appendProjects(await Promise.all(projectsWithPalettes))
+}
+
+function changeLockedIcon() {
+  if ($(this).attr('src').includes("unlocked")) {
+    $(this).attr("src","../images/locked.svg");
+    $(this).addClass("locked");
+  } else {
+    $(this).attr("src","../images/unlocked.svg");
+    $(this).removeClass("locked");
+  }
+}
+
+const validateFields = () => {
+  const projectInput = $('.form__input-project')
+  const paletteInput = $('.form__input-palette')
+  const projectButton = $('.save-project')
+  const paletteButton = $('.save-palette')
+
+  projectInput.val() === '' ? 
+    projectButton.prop('disabled', true) : 
+    projectButton.prop('disabled', false)
+    
+  paletteInput.val() === '' ? 
+    paletteButton.prop('disabled', true) : 
+    paletteButton.prop('disabled', false)
 }
 
 const fetchProjects = async () => {
@@ -45,13 +73,6 @@ const fetchPalettes = async (projectID) => {
   return palettes;
 }
 
-function changeLockedIcon() {
-  if ($(this).attr('src').includes("unlocked")) {
-    $(this).attr("src","../images/locked.svg");
-  } else {
-    $(this).attr("src","../images/unlocked.svg");
-  }
-}
 
 const postData = async (url, data) => {
   const response = await fetch(url, {
@@ -68,7 +89,6 @@ const postData = async (url, data) => {
 const saveProject = () => {
   event.preventDefault()
   const $cardArea = $(".section__div-projects");
-  const $projectName = $('.form__input-project').val();
   const $selectDropdown = $(".form__select-projects");
 
   postData('/api/v1/projects', {name: $projectName})
@@ -119,6 +139,7 @@ const savePalette = (event) => {
       )
     })
     .catch(error => console.error(error))
+  $('.form__input-palette').val('');
 }
 
 
@@ -199,8 +220,11 @@ const appendProjects = (projects) => {
   })
 }
 
+
+$('.form__input-project').on('keyup', validateFields)
+$('.form__input-palette').on('keyup', validateFields)
 $(".div__button--generate").on('click', generateColors)
 $(".div__img-lockicon").on('click', changeLockedIcon)
 $('.save-palette').on('click', savePalette)
-$('.save-projects').on('click', saveProject);
+$('.save-project').on('click', saveProject);
 $(".main__section-bottom").on('click', deletePalette)
