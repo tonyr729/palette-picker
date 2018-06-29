@@ -1,11 +1,7 @@
-const getRandomColor = () => {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
+$(document).ready(() => {
+  generateColors();
+  loadProjects();
+})
 
 const generateColors = (event) => {
   for (let index = 0; index < 5; index++) {
@@ -17,17 +13,24 @@ const generateColors = (event) => {
   }
 }
 
-generateColors();
-
-$(".div__button--generate").on('click', generateColors)
-$(".div__img-lockicon").on('click', changeLockedIcon)
-
-function changeLockedIcon() {
-  if ($(this).attr('src').includes("unlocked")) {
-    $(this).attr("src","../images/locked.svg");
-  } else {
-    $(this).attr("src","../images/unlocked.svg");
+const getRandomColor = () => {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
   }
+  return color;
+}
+
+const loadProjects = async () => {
+  const projects = await fetchProjects();
+  const projectsWithPalettes= projects.map(async project => {
+    const projectPalettes = await fetchPalettes(project.id)
+    const newProject = {...project, palettes: projectPalettes}
+    return newProject;
+  });
+
+  appendProjects(await Promise.all(projectsWithPalettes))
 }
 
 const fetchProjects = async () => {
@@ -42,24 +45,19 @@ const fetchPalettes = async (projectID) => {
   return palettes;
 }
 
-const loadProjects = async () => {
-  const projects = await fetchProjects();
-  const projectsWithPalettes= projects.map(async project => {
-    const projectPalettes = await fetchPalettes(project.id)
-    const newProject = {...project, palettes: projectPalettes}
-    return newProject;
-  });
-
-  appendProjects(await Promise.all(projectsWithPalettes))
+function changeLockedIcon() {
+  if ($(this).attr('src').includes("unlocked")) {
+    $(this).attr("src","../images/locked.svg");
+  } else {
+    $(this).attr("src","../images/unlocked.svg");
+  }
 }
-
-
 
 const postData = async (url, data) => {
   const response = await fetch(url, {
     body: JSON.stringify(data),
     headers: {
-      'content-type': 'application/json'
+      'Content-Type': 'application/json'
     },
     method: 'POST'
   });
@@ -67,29 +65,62 @@ const postData = async (url, data) => {
   return result;
 }
 
-
 const saveProject = () => {
-  const $projectName = $('.form__input-project').val()
+  event.preventDefault()
+  const $cardArea = $(".section__div-projects");
+  const $projectName = $('.form__input-project').val();
+  const $selectDropdown = $(".form__select-projects");
+
   postData('http://localhost:3000/api/v1/projects', {name: $projectName})
-  .then(result=> console.log(result))
-  .catch(error => console.error(error))
+    .then(result=> {
+      $selectDropdown.append(
+        `<option value=${result.id}>${$projectName}</option>`
+      )
+
+      $cardArea.append(
+        `<div class="project__card id__${result.id}">
+          <h3 class="project__title">${$projectName}</h3>
+          <div class="palette-container">
+            <p class="palette__name message">No Palettes saved.</p>
+          </div>
+        </div>`
+      )
+    })
+    .catch(error => console.error(error))
 }
-
-$('.save-projects').on('click', saveProject);
-
-const savePalette = () => {
+  
+const savePalette = (event) => {
+  event.preventDefault()
   const $paletteName = $('.form__input-palette').val();
   const colors = captureColors();
   const $currProject = $('.form__select-projects').val()
+  const $projectCard = $(`.id__${$currProject}`)
   const finalPalette = generatePalette($paletteName, colors, $currProject);
   const url = `http://localhost:3000/api/v1/projects/${$currProject}/palettes`;
-
+  
   postData(url, finalPalette)
-    .then(result=> console.log(result))
+    .then(result=> {
+      const $palette = $(`.id__${$currProject}`).children('div')
+      
+      if ($palette.children('p').text() === "No Palettes saved.") {
+        $palette.remove();
+      }
+
+      $projectCard.append(
+        `<div class="palette-container" data-projectid="${$currProject}" data-paletteid="${result.id}">
+          <p class="palette__name">${$paletteName}</p>
+          <div class="div__color" style="background-color: ${colors[0]};"></div>
+          <div class="div__color" style="background-color: ${colors[1]};"></div>
+          <div class="div__color" style="background-color: ${colors[2]};"></div>
+          <div class="div__color" style="background-color: ${colors[3]};"></div>
+          <div class="div__color" style="background-color: ${colors[4]};"></div>
+          <img src="${'../images/white_x.svg'}" id="delete" alt="delete icon" />
+        </div>`
+      )
+    })
     .catch(error => console.error(error))
 }
 
-$('.save-palette').on('click', savePalette)
 
 const captureColors = () => {
   const colorElements = $('.div__p-colorhex')
@@ -110,6 +141,23 @@ const generatePalette = (name, colors, pID) => {
   return palette;
 }
 
+const deleteData = async (projectID, paletteID) => {
+  fetch(`http://localhost:3000/api/v1/projects/${projectID}/palettes/${paletteID}`, {
+    method: 'DELETE'
+  });
+}
+
+function deletePalette(event) {
+  if (event.target.id === 'delete') {
+    const paletteContainer = event.target.closest('.palette-container');
+    const projectID = paletteContainer.dataset.projectid
+    const paletteID = paletteContainer.dataset.paletteid;
+
+    deleteData(projectID, paletteID)
+    paletteContainer.remove();
+  }
+}
+ 
 
 const appendProjects = (projects) => {
   const $cardArea = $(".section__div-projects");
@@ -119,36 +167,40 @@ const appendProjects = (projects) => {
     if (!project.palettes.error) {
       paletteInfo = project.palettes.map(palette => {
         return (
-          `<div class="palette-container">
-            <p class="palette__name">${palette.name}</p>
-            <div class="div__color" style="background-color: ${palette.color1};"></div>
-            <div class="div__color" style="background-color: ${palette.color2};"></div>
-            <div class="div__color" style="background-color: ${palette.color3};"></div>
-            <div class="div__color" style="background-color: ${palette.color4};"></div>
-            <div class="div__color" style="background-color: ${palette.color5};"></div>
-            <img src="${'../images/white_x.svg'}" alt="delete icon" />
+          `<div class="palette-container" data-projectid="${project.id}" data-paletteid="${palette.id}">
+          <p class="palette__name">${palette.name}</p>
+          <div class="div__color" style="background-color: ${palette.color1};"></div>
+          <div class="div__color" style="background-color: ${palette.color2};"></div>
+          <div class="div__color" style="background-color: ${palette.color3};"></div>
+          <div class="div__color" style="background-color: ${palette.color4};"></div>
+          <div class="div__color" style="background-color: ${palette.color5};"></div>
+          <img src="${'../images/white_x.svg'}" id="delete" alt="delete icon" />
           </div>`
         )
       });
     } else {
       paletteInfo = [(
         `<div class="palette-container">
-          <p class="palette__name">No Palettes saved.</p>
+        <p class="palette__name message">No Palettes saved.</p>
         </div>`
       )]
     }
+    
+    $cardArea.append(
+      `<div class="project__card id__${project.id}">
+      <h3 class="project__title">${project.name}</h3>
+      ${paletteInfo}
+      </div>`
+    )
 
     $selectDropdown.append(
       `<option value=${project.id}>${project.name}</option>`
     )
-
-    $cardArea.append(
-      `<div class="project__card">
-        <button class="project__button">${project.name}</button>
-        ${paletteInfo}
-      </div>`
-    )
   })
 }
 
-loadProjects();
+$(".div__button--generate").on('click', generateColors)
+$(".div__img-lockicon").on('click', changeLockedIcon)
+$('.save-palette').on('click', savePalette)
+$('.save-projects').on('click', saveProject);
+$(".main__section-bottom").on('click', deletePalette)

@@ -77,6 +77,17 @@ app.post('/api/v1/projects/:id/palettes', (request, response) => {
     });
 });
 
+app.delete('/api/v1/projects/:id/palettes/:id2', (request, response) => {
+  const { id2 } = request.params;
+  database('palettes').where({id: id2}).del()
+    .then(palette => {
+      response.sendStatus(204)
+    })
+    .catch(error => {
+      response.status(404).json({message:'Could not find matching id'})
+    });
+});
+
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on ${app.get('port')}.`);
 });
