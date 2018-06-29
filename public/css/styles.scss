@@ -187,6 +187,7 @@ main {
 
 .section__div-projects {
   display: flex;
+  overflow-x: scroll;
 }
 
 .project__card {
@@ -199,11 +200,11 @@ main {
   }
 }
 
-.project__button {
-  font-size: 2rem;
-  padding: .5rem 1rem;
-  border: none;
-  box-shadow: 2px 2px 3px;
+.project__title {
+  font-size: 3rem;
+  color: #fff;
+  text-shadow: 3px 3px 2px #000;
+  border-bottom: .1rem solid rgba(255, 255, 255, 0.3);
 }
 
 .palette-container {

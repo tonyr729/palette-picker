@@ -154,7 +154,8 @@ main {
       border-radius: .5rem; }
 
 .section__div-projects {
-  display: flex; }
+  display: flex;
+  overflow-x: scroll; }
 
 .project__card {
   width: 35rem;
@@ -164,11 +165,11 @@ main {
     font-size: 1.2rem;
     color: #fff; }
 
-.project__button {
-  font-size: 2rem;
-  padding: .5rem 1rem;
-  border: none;
-  box-shadow: 2px 2px 3px; }
+.project__title {
+  font-size: 3rem;
+  color: #fff;
+  text-shadow: 3px 3px 2px #000;
+  border-bottom: 0.1rem solid rgba(255, 255, 255, 0.3); }
 
 .palette-container {
   display: flex;
