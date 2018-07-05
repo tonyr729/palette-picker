@@ -4,7 +4,7 @@ services:
 - postgresql
 before_script:
 - psql -c 'CREATE DATABASE palette_picker_test;' -U postgres
-  notifications:
+notifications:
   email: false
 deploy:
   provider: heroku
