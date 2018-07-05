@@ -1,7 +1,7 @@
 module.exports = {
   test: {
     client: 'pg',
-    connection: 'postgres://localhost/mocha_chai_tv_shows_test',
+    connection: 'postgres://localhost/palette_picker_test',
     migrations: {
       directory: __dirname + '/db/migrations'
     },
