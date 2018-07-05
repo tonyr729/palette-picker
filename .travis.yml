@@ -2,7 +2,7 @@ language: node_js
 node_js: '9'
 services:
   - postgresql
-before_script: 
+before_script:
   - psql -c 'CREATE DATABASE palette_picker_test;' -U postgres
-  notifications:
-    email: false
+notifications:
+  email: false
