@@ -1,8 +1,14 @@
 language: node_js
 node_js: '9'
 services:
-  - postgresql
+- postgresql
 before_script:
-  - psql -c 'CREATE DATABASE palette_picker_test;' -U postgres
+- psql -c 'CREATE DATABASE palette_picker_test;' -U postgres
 notifications:
   email: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: GNE+aBUjoYTe4ty7ltVZjdHWWBPam7MM3s8tO+DxSekpDNzs5j4q6PjB1iOV8DIUDbTybIYLCxAIb1RRBJDQ3E9aFMjQQH974XoMt0StkKnT+jAi3H4ISPncCZQvTNrTlU9UaN34iwsa4kZ3sbSLu6LL1XklLorWIOb9Lk/Bg+PoFyAI5lwQZxQv+WavH5vYJOGrwKkvpZxxIT2nxfg5MCM1UnsHTpXP7sQKMLivOe/l55D5VsP+obClcnTtrRHXEIwVv3NAwFdmomd4tDDf7IJvwQ6PTdi17ySpAjSOSNwELdz+UDEdBcJ9njEn9FhUdt0jB/tKmFFcyb/SEGNQXqhpVyDah/Ct/hcX/2CLJbqnuavpjlEhje98QlOzgVIwa+GKaQZjFotgR+OQVJwtxTctFM64+CXkt3+Ou0iqG4tIYr2zXdf3nUXyzINuaqk+FC36zgYjoculPyJNA0hnryFdvOIDFGEOP3ivwgZOiaxv0GNP3Syh1qHB9UFpEKAia7lVwwZuz+ZBHFjEYWGGvDascPTmqa530HeDCij46hh6Nj/wR1ZgTVLuxFXZIAXZTpzvTUoXud6WJlXg77kRVrCaRGSSe5cIdqM2VklXgKyNHvZOT+HTc7bvzBmsqZoPvd4B1ij+OMKCkZ01H0yVen/w0LqZpJL/vhl4qS+i504=
+  app: palettegalhexy
+  skip_cleanup: true

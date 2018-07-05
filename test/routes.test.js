@@ -46,9 +46,8 @@ describe('API Routes', () => {
         response.should.be.json;
         response.body.should.be.a('array');
         response.body.length.should.equal(1);
-        console.log(response.body[0].lastname)
         (response.body[0]).should.have.property('name');
-        // (response.body[0].lastname).should.equal('Project 1');
+        (response.body[0].name).should.equal('Project 1');
         done();
       });
     });
