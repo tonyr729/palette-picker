@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 
 app.set('port', process.env.PORT || 3000);
 
+// Mike Dao is creepin
+
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
